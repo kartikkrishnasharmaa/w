@@ -1,262 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="Kartik & Shweta Wedding - Traditional ceremonies, Family functions, Shagun contribution.">
+  <title>Kartik & Shweta | Grand Wedding Invitation</title>
+  
+  <!-- Tailwind CSS + Google Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Arvo:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- jQuery + Sakura petals -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/timoschaefer/jQuery-Sakura/jquery-sakura.min.js"></script>
+  
+  <!-- QR Code Library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  
+  <style>
+    /* custom animations and wedding vibe */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+      100% { transform: translateY(0px); }
+    }
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+    }
+    @keyframes sway {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(2deg); }
+    }
+    .floating {
+      animation: float 4s ease-in-out infinite;
+    }
+    .glow-gold {
+      animation: glowPulse 2s infinite;
+    }
+    .wedding-card {
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    .wedding-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 30px 40px -15px rgba(0,0,0,0.3);
+    }
+    .sakura {
+      pointer-events: none;
+      position: absolute;
+      z-index: 25;
+    }
+    .btn-shine {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-shine:after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(115deg, rgba(255,255,255,0) 10%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 90%);
+      transform: rotate(25deg);
+      animation: shine 2.5s infinite;
+    }
+    @keyframes shine {
+      0% { transform: translateX(-100%) rotate(25deg); }
+      100% { transform: translateX(100%) rotate(25deg); }
+    }
+    .modal-fade {
+      transition: opacity 0.3s ease, visibility 0.3s;
+    }
+    .decor-line {
+      background: linear-gradient(90deg, transparent, #f4a261, #e76f51, #f4a261, transparent);
+      height: 2px;
+      width: 80%;
+      margin: 0 auto;
+    }
+    body {
+      background: linear-gradient(145deg, #fffaf3 0%, #ffefdd 100%);
+    }
+  </style>
+</head>
+<body class="relative overflow-x-hidden">
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="description" content="Invitation to the wedding of Kartik & Shweta with traditional ceremonies in Sikar, Rajasthan.">
-    <meta name="author" content="Kartik Sharma">
-    <title>Kartik & Shweta | Wedding Invitation</title>
-    
-    <!-- Tailwind CSS + Fonts + CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Arvo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <!-- jQuery & Sakura petals (for falling effect) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/timoschaefer/jQuery-Sakura/jquery-sakura.min.js"></script>
-    
-    <style>
-        /* Custom overrides for extra charm */
-        body {
-        font-family: 'Arvo', serif;
-        background: linear-gradient(145deg, #fff9f0 0%, #ffe6dc 100%);
-        }
-        .dancing {
-        font-family: 'Dancing Script', cursive;
-        }
-        .maroon-text {
-        color: #9b2c2c;
-        }
-        .gold-border {
-        border-image: none;
-        box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
-        }
-        .sakura {
-        pointer-events: none;
-        position: absolute;
-        z-index: 20;
-        }
-        /* subtle sway for flowers */
-        @keyframes gentleSway {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(3deg); }
-        }
-        .sway-element {
-        animation: gentleSway 4s infinite alternate ease-in-out;
-        }
-        .event-card {
-        transition: all 0.2s ease;
-        }
-        .event-card:hover {
-        transform: scale(1.01);
-        background: #fff5ef;
-        box-shadow: 0 12px 22px -10px rgba(128, 70, 70, 0.2);
-        }
-        .countdown-block {
-        transition: transform 0.2s;
-        }
-        .countdown-block:hover {
-        transform: translateY(-5px);
-        }
-    </style>
-    </head>
-    <body class="relative overflow-x-hidden">
+  <!-- Falling petals -->
+  <div class="sakura-falling"></div>
 
-    <!-- Falling petals background (sakura) -->
-    <div class="sakura-falling"></div>
-    
-    <!-- Decorative corners with Indian traditional elements -->
-    <div class="fixed top-0 left-0 z-10 opacity-80">
-        <img src="https://cdn-icons-png.flaticon.com/512/1030/1030877.png" alt="decorative left" class="w-20 md:w-28 opacity-60">
+  <!-- Traditional toran style top -->
+  <div class="relative z-20">
+    <div class="absolute top-0 left-0 w-full flex justify-between px-4 pointer-events-none opacity-70">
+      <i class="fas fa-leaf text-5xl text-amber-600 rotate-[-20deg]"></i>
+      <i class="fas fa-leaf text-5xl text-rose-500 rotate-[20deg]"></i>
     </div>
-    <div class="fixed top-0 right-0 z-10 opacity-80">
-        <img src="https://cdn-icons-png.flaticon.com/512/1030/1030895.png" alt="decorative right" class="w-20 md:w-28 opacity-60 transform scale-x-[-1]">
+  </div>
+
+  <main class="container mx-auto px-4 py-6 max-w-6xl relative z-10">
+    
+    <!-- Ganpati Mantra with animation -->
+    <div class="text-center mb-6 floating">
+      <p class="text-3xl md:text-5xl dancing font-bold text-rose-800">॥ श्री गणेशाय नमः ॥</p>
+      <p class="text-sm md:text-base text-gray-700 italic max-w-xl mx-auto mt-2">वक्रतुण्ड महाकाय सूर्यकोटि समप्रभः। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥</p>
+    </div>
+
+    <!-- Main couple card -->
+    <div class="bg-white/80 backdrop-blur-sm rounded-[3rem] shadow-2xl p-6 md:p-10 mb-12 text-center border-2 border-amber-200 wedding-card">
+      <div class="flex justify-center gap-4 text-rose-500 text-3xl mb-2">
+        <i class="fas fa-heart animate-pulse"></i> <i class="fas fa-ring"></i> <i class="fas fa-heart animate-pulse"></i>
+      </div>
+      <h1 class="dancing text-6xl md:text-8xl font-bold text-rose-800">Kartik</h1>
+      <div class="flex justify-center items-center my-3 gap-4">
+        <i class="fas fa-heart text-rose-400 text-3xl"></i>
+        <span class="dancing text-5xl text-amber-700">&</span>
+        <i class="fas fa-heart text-rose-400 text-3xl"></i>
+      </div>
+      <h1 class="dancing text-6xl md:text-8xl font-bold text-rose-800">Shweta</h1>
+      <div class="decor-line my-5"></div>
+      <p class="text-xl dancing text-gray-700">💖 मंगल परिणोत्सव 💖</p>
+      <p class="text-gray-600 mt-2 max-w-lg mx-auto">परमपिता परमेश्वर, कुलदेवी माँ शाकम्भरी एवं बालाजी महाराज की कृपा से आप सादर आमंत्रित हैं।</p>
+      <div class="mt-4 flex flex-wrap justify-center gap-3">
+        <span class="bg-amber-100 px-4 py-1 rounded-full text-sm"><i class="fas fa-calendar-alt"></i> 22-26 अप्रैल 2026</span>
+        <span class="bg-rose-100 px-4 py-1 rounded-full text-sm"><i class="fas fa-map-marker-alt"></i> सीकर | मण्डावा, राजस्थान</span>
+      </div>
+    </div>
+
+    <!-- Two Beautiful Cards for Boy & Girl Side with separate program list -->
+    <div class="grid md:grid-cols-2 gap-8 mb-14">
+      <!-- Boy Side Card with Detailed Program -->
+      <div class="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-3xl shadow-xl overflow-hidden border-2 border-indigo-300 transition-all hover:shadow-2xl">
+        <div class="bg-indigo-700 p-4 text-center">
+          <i class="fas fa-male text-5xl text-white"></i>
+          <h3 class="dancing text-3xl font-bold text-white mt-1">वर पक्ष (Boy's Side)</h3>
+          <p class="text-indigo-100 text-sm">श्री मुरारी लाल शर्मा & श्रीमती उर्मिला देवी</p>
+        </div>
+        <div class="p-5">
+          <div class="flex justify-between items-center border-b border-indigo-200 pb-2">
+            <span class="font-bold"><i class="fas fa-user-tie"></i> वर :</span>
+            <span>चिरंजीव कार्तिक (कृष्णा)</span>
+          </div>
+          <div class="mt-3">
+            <h4 class="font-bold dancing text-indigo-800 text-xl">✨ कार्यक्रम सूची ✨</h4>
+            <ul class="mt-2 space-y-2 text-sm">
+              <li class="flex justify-between"><span>🌺 श्री गणेश पूजन</span><span class="font-semibold">22 अप्रैल, प्रातः 11:15</span></li>
+              <li class="flex justify-between"><span>🟡 हल्दी हाथ व बान</span><span class="font-semibold">22 अप्रैल, दोपहर 1:15</span></li>
+              <li class="flex justify-between"><span>🌿 मेहँदी</span><span class="font-semibold">23 अप्रैल, दोपहर 1:15</span></li>
+              <li class="flex justify-between"><span>💍 तिलक व सगाई</span><span class="font-semibold">24 अप्रैल, सांय 5:15</span></li>
+              <li class="flex justify-between"><span>🍛 स्वरुचि भोज</span><span class="font-semibold">24 अप्रैल, सांय 7:00</span></li>
+              <li class="flex justify-between"><span>🍚 चाक-भात</span><span class="font-semibold">25 अप्रैल, दोपहर 1:15</span></li>
+              <li class="flex justify-between"><span>🐎 निकासी</span><span class="font-semibold">25 अप्रैल, सांय 7:30</span></li>
+              <li class="flex justify-between font-bold text-indigo-700"><span>🔱 पाणिग्रहण संस्कार</span><span>26 अप्रैल, रात्रि शुभ लग्नानुसार</span></li>
+            </ul>
+          </div>
+          <div class="mt-4 bg-indigo-100 p-3 rounded-xl text-sm">
+            <i class="fas fa-horse-head"></i> <strong>बारात प्रस्थान :</strong> 26 अप्रैल, दोपहर 3:15 बजे, सीकर से मण्डावा
+          </div>
+          <button class="boy-details-btn mt-4 w-full bg-indigo-600 text-white py-2 rounded-full font-semibold hover:bg-indigo-700 transition flex items-center justify-center gap-2 btn-shine"><i class="fas fa-info-circle"></i> पूरा विवरण व आशीर्वाद</button>
+        </div>
+      </div>
+
+      <!-- Girl Side Card with Detailed Program -->
+      <div class="bg-gradient-to-br from-rose-50 to-pink-50 rounded-3xl shadow-xl overflow-hidden border-2 border-rose-300 transition-all hover:shadow-2xl">
+        <div class="bg-rose-700 p-4 text-center">
+          <i class="fas fa-female text-5xl text-white"></i>
+          <h3 class="dancing text-3xl font-bold text-white mt-1">वधू पक्ष (Girl's Side)</h3>
+          <p class="text-rose-100 text-sm">श्री सुरेश कुमार शर्मा & श्रीमती रोहिणी देवी</p>
+        </div>
+        <div class="p-5">
+          <div class="flex justify-between border-b border-rose-200 pb-2">
+            <span class="font-bold"><i class="fas fa-female"></i> वधू :</span>
+            <span>श्‍वेता</span>
+          </div>
+          <div class="mt-3">
+            <h4 class="font-bold dancing text-rose-800 text-xl">✨ कार्यक्रम सूची ✨</h4>
+            <ul class="mt-2 space-y-2 text-sm">
+              <li class="flex justify-between"><span>🌺 गणेश पूजन (वधू गृह)</span><span>22 अप्रैल, प्रातः 11:15</span></li>
+              <li class="flex justify-between"><span>🟡 हल्दी समारोह</span><span>22 अप्रैल, दोपहर 1:15</span></li>
+              <li class="flex justify-between"><span>🎨 मेहँदी रचना</span><span>23 अप्रैल, दोपहर 1:15</span></li>
+              <li class="flex justify-between"><span>🤝 तिलक व सगाई</span><span>24 अप्रैल, सांय 5:15</span></li>
+              <li class="flex justify-between"><span>🍽️ स्वरुचि भोज</span><span>24 अप्रैल, सांय 7:00</span></li>
+              <li class="flex justify-between"><span>🍚 चाक-भात</span><span>25 अप्रैल, दोपहर 1:15</span></li>
+              <li class="flex justify-between"><span>✨ निकासी व दुल्हन विदाई</span><span>25 अप्रैल, सांय 7:30</span></li>
+              <li class="flex justify-between font-bold text-rose-700"><span>🔱 पाणिग्रहण</span><span>26 अप्रैल, रात्रि शुभ लग्न</span></li>
+            </ul>
+          </div>
+          <div class="mt-4 bg-rose-100 p-3 rounded-xl text-sm">
+            <i class="fas fa-venus"></i> <strong>मण्डावा स्थित निवास :</strong> पारंपरिक रीति-रिवाजों से विवाह
+          </div>
+          <button class="girl-details-btn mt-4 w-full bg-rose-600 text-white py-2 rounded-full font-semibold hover:bg-rose-700 transition flex items-center justify-center gap-2 btn-shine"><i class="fas fa-heart"></i> विवरण व शुभाशीष</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Venue & Quick Info -->
+    <div class="grid md:grid-cols-2 gap-5 mb-12">
+      <div class="bg-white rounded-2xl p-4 shadow-lg flex items-center gap-4 border-l-8 border-amber-500">
+        <i class="fas fa-map-marked-alt text-4xl text-amber-600"></i>
+        <div><p class="font-bold dancing text-xl">विवाह स्थल</p><p>🏛️ मैना सदन, आमली रोड, सीकर (राजस्थान)</p><p class="text-xs">फोन: 01572-257067 | <a href="https://maps.app.goo.gl/SCtzsRRQToHuszvQ9" target="_blank" class="text-indigo-600">दिशा निर्देश <i class="fas fa-external-link-alt"></i></a></p></div>
+      </div>
+      <div class="bg-white rounded-2xl p-4 shadow-lg flex items-center gap-4 border-l-8 border-rose-400">
+        <i class="fas fa-horse-head text-4xl text-rose-500"></i>
+        <div><p class="font-bold dancing text-xl">बारात सूचना</p><p>26 अप्रैल, दोपहर 3:15 बजे, निवास स्थान (सीकर) से मण्डावा प्रस्थान।</p><p class="text-xs"><i class="fas fa-music"></i> बैंड-बाजा, घुड़ी सजकर स्वागत</p></div>
+      </div>
+    </div>
+
+    <!-- Shagun Section with QR Codes for Both Families -->
+    <div class="bg-gradient-to-r from-amber-50 to-rose-50 rounded-3xl p-6 mb-10 shadow-2xl">
+      <div class="text-center mb-4">
+        <h3 class="dancing text-3xl font-bold text-rose-800">💐 शगुन एवं आशीर्वाद 💐</h3>
+        <p class="text-gray-600 text-sm">आपका शुभाशीष एवं शगुन हमारे नवदंपति के जीवन को समृद्ध करेगा। कृपया नीचे दिए QR कोड स्कैन करें।</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Boy Side QR -->
+        <div class="text-center bg-white p-4 rounded-2xl shadow-md">
+          <i class="fas fa-male text-3xl text-indigo-700"></i>
+          <h4 class="font-bold dancing text-xl text-indigo-800">वर पक्ष (Kartik Family)</h4>
+          <div id="qr-boy" class="flex justify-center my-3"></div>
+          <p class="text-xs text-gray-500">UPI / GPay / PhonePe स्कैन करें</p>
+          <button class="shagun-boy mt-2 bg-indigo-600 text-white px-5 py-1.5 rounded-full text-sm hover:bg-indigo-700 transition">✨ शगुन राशि भेजें</button>
+        </div>
+        <!-- Girl Side QR -->
+        <div class="text-center bg-white p-4 rounded-2xl shadow-md">
+          <i class="fas fa-female text-3xl text-rose-600"></i>
+          <h4 class="font-bold dancing text-xl text-rose-800">वधू पक्ष (Shweta Family)</h4>
+          <div id="qr-girl" class="flex justify-center my-3"></div>
+          <p class="text-xs text-gray-500">UPI / GPay / PhonePe स्कैन करें</p>
+          <button class="shagun-girl mt-2 bg-rose-600 text-white px-5 py-1.5 rounded-full text-sm hover:bg-rose-700 transition">🌸 शगुन राशि भेजें</button>
+        </div>
+      </div>
+      <p class="text-center text-xs text-gray-500 mt-5"><i class="fas fa-hand-holding-heart"></i> आपके आशीर्वाद से ही यह विवाह सफल होगा। धन्यवाद।</p>
     </div>
     
-    <main class="container mx-auto px-4 py-6 md:py-10 max-w-5xl relative z-10">
-        
-        <!-- Ganpati & main wedding header -->
-        <div class="text-center mb-6">
-        <p class="text-2xl md:text-3xl text-amber-800 dancing font-bold">॥ श्री गणेशाय नमः ॥</p>
-        <p class="text-sm md:text-base text-gray-700 italic mt-1 max-w-xl mx-auto leading-relaxed">वक्रतुण्ड महाकाय सूर्यकोटि समप्रभः। <br/> निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥</p>
-        </div>
-        
-        <!-- Bride & Groom names with elegant design -->
-        <div class="bg-white/70 backdrop-blur-sm rounded-3xl shadow-2xl p-6 md:p-10 mb-10 border border-rose-200 gold-border">
-        <div class="text-center">
-            <h1 class="dancing text-6xl md:text-7xl font-bold text-rose-800">Kartik</h1>
-            <div class="flex justify-center items-center my-2">
-            <i class="fas fa-heart text-rose-500 text-2xl mx-3"></i>
-            <h2 class="dancing text-4xl md:text-5xl font-semibold text-amber-700">&</h2>
-            <i class="fas fa-heart text-rose-500 text-2xl mx-3"></i>
-            </div>
-            <h1 class="dancing text-6xl md:text-7xl font-bold text-rose-800">Shweta</h1>
-            <div class="w-28 h-1 bg-gradient-to-r from-amber-400 to-rose-400 mx-auto my-5 rounded-full"></div>
-            <p class="text-xl md:text-2xl dancing text-gray-700">💖 मंगल परिणोत्सव 💖</p>
-            <p class="text-gray-600 mt-2 max-w-lg mx-auto">परमपिता परमेश्वर, कुलदेवी माँ शाकम्भरी एवं बालाजी महाराज की कृपा से आप सादर आमंत्रित हैं।</p>
-        </div>
-        </div>
-        
-        <!-- Auspicious Ceremony Schedule Grid (As per content) -->
-        <div class="mb-12">
-        <h3 class="dancing text-4xl text-center text-rose-800 font-bold mb-2">✨ विवाह उत्सव कार्यक्रम ✨</h3>
-        <p class="text-center text-amber-700 mb-8">पारंपरिक रीति-रिवाजों के साथ, हर्षोल्लास का संगम</p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <!-- Row 1 -->
-            <div class="event-card bg-white rounded-2xl p-5 shadow-md border-l-8 border-rose-400">
-            <div class="flex items-center gap-3"><i class="fas fa-pray text-rose-600 text-2xl"></i><span class="font-bold dancing text-2xl text-gray-800">श्री गणेश पूजन</span></div>
-            <div class="flex justify-between mt-2 text-gray-700"><span>बुधवार, 22 अप्रैल 2026</span><span class="font-semibold">प्रातः 11:15 बजे</span></div>
-            </div>
-            <div class="event-card bg-white rounded-2xl p-5 shadow-md border-l-8 border-orange-400">
-            <div class="flex items-center gap-3"><i class="fas fa-hand-holding-heart text-orange-600 text-2xl"></i><span class="font-bold dancing text-2xl text-gray-800">हल्दी हाथ व बान</span></div>
-            <div class="flex justify-between mt-2"><span>बुधवार, 22 अप्रैल 2026</span><span class="font-semibold">दोपहर 1:15 बजे</span></div>
-            </div>
-            <div class="event-card bg-white rounded-2xl p-5 shadow-md border-l-8 border-green-600">
-            <div class="flex items-center gap-3"><i class="fas fa-leaf text-green-700 text-2xl"></i><span class="font-bold dancing text-2xl text-gray-800">मेहँदी</span></div>
-            <div class="flex justify-between mt-2"><span>गुरुवार, 23 अप्रैल 2026</span><span class="font-semibold">दोपहर 1:15 बजे</span></div>
-            </div>
-            <div class="event-card bg-white rounded-2xl p-5 shadow-md border-l-8 border-purple-500">
-            <div class="flex items-center gap-3"><i class="fas fa-ring text-purple-700 text-2xl"></i><span class="font-bold dancing text-2xl text-gray-800">तिलक व सगाई</span></div>
-            <div class="flex justify-between mt-2"><span>शुक्रवार, 24 अप्रैल 2026</span><span class="font-semibold">सांय 5:15 बजे</span></div>
-            </div>
-            <div class="event-card bg-white rounded-2xl p-5 shadow-md border-l-8 border-yellow-600">
-            <div class="flex items-center gap-3"><i class="fas fa-utensils text-yellow-700 text-2xl"></i><span class="font-bold dancing text-2xl text-gray-800">स्वरुचि भोज</span></div>
-            <div class="flex justify-between mt-2"><span>शुक्रवार, 24 अप्रैल 2026</span><span class="font-semibold">सांय 7:00 बजे से</span></div>
-            </div>
-            <div class="event-card bg-white rounded-2xl p-5 shadow-md border-l-8 border-indigo-500">
-            <div class="flex items-center gap-3"><i class="fas fa-chalkboard-user text-indigo-700 text-2xl"></i><span class="font-bold dancing text-2xl text-gray-800">चाक-भात</span></div>
-            <div class="flex justify-between mt-2"><span>शनिवार, 25 अप्रैल 2026</span><span class="font-semibold">दोपहर 1:15 बजे</span></div>
-            </div>
-            <div class="event-card bg-white rounded-2xl p-5 shadow-md border-l-8 border-rose-500">
-            <div class="flex items-center gap-3"><i class="fas fa-horse-head text-rose-700 text-2xl"></i><span class="font-bold dancing text-2xl text-gray-800">निकासी</span></div>
-            <div class="flex justify-between mt-2"><span>शनिवार, 25 अप्रैल 2026</span><span class="font-semibold">सांय 7:30 बजे</span></div>
-            </div>
-            <div class="event-card bg-white rounded-2xl p-5 shadow-md border-l-8 border-red-700">
-            <div class="flex items-center gap-3"><i class="fas fa-hand-holding-heart text-red-700 text-2xl"></i><span class="font-bold dancing text-2xl text-gray-800">पाणिग्रहण संस्कार</span></div>
-            <div class="flex justify-between mt-2"><span>रविवार, 26 अप्रैल 2026</span><span class="font-semibold">रात्रि शुभ लग्नानुसार</span></div>
-            </div>
-        </div>
-        <div class="text-center mt-6 text-sm text-gray-600 bg-amber-50 p-2 rounded-full max-w-md mx-auto"><i class="fas fa-asterisk text-rose-400"></i> विशेष : कृपया महिलाओं का निमंत्रण भी इसी पत्रिका द्वारा स्वीकार करें।</div>
-        </div>
-        
-        <!-- Countdown Timer (Dynamic) -->
-        <div class="bg-gradient-to-r from-rose-50 to-orange-50 rounded-3xl p-5 mb-12 shadow-xl">
-        <h3 class="dancing text-3xl text-center text-rose-800">💞 शुभ विवाह का समय 💞</h3>
-        <div id="countdown-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5">
-            <div class="countdown-block bg-white rounded-2xl p-4 text-center shadow"><div id="days" class="text-4xl font-bold text-rose-700">00</div><div class="text-gray-600">दिन</div></div>
-            <div class="countdown-block bg-white rounded-2xl p-4 text-center shadow"><div id="hours" class="text-4xl font-bold text-rose-700">00</div><div class="text-gray-600">घंटे</div></div>
-            <div class="countdown-block bg-white rounded-2xl p-4 text-center shadow"><div id="minutes" class="text-4xl font-bold text-rose-700">00</div><div class="text-gray-600">मिनट</div></div>
-            <div class="countdown-block bg-white rounded-2xl p-4 text-center shadow"><div id="seconds" class="text-4xl font-bold text-rose-700">00</div><div class="text-gray-600">सेकंड</div></div>
-        </div>
-        <p class="text-center text-sm mt-3 text-gray-600">पाणिग्रहण संस्कार के शुभ अवसर की प्रतीक्षा में</p>
-        </div>
-        
-        <!-- Venue & Baraat Details + Map -->
-        <div class="grid md:grid-cols-2 gap-6 mb-12">
-        <div class="bg-white rounded-2xl p-6 shadow-lg border border-rose-100">
-            <i class="fas fa-map-marker-alt text-3xl text-rose-600 mb-2"></i>
-            <h3 class="dancing text-2xl font-bold">विवाह स्थल</h3>
-            <p class="font-semibold text-gray-800 mt-2">🏛️ मैना सदन, आमली रोड, सीकर (राजस्थान)</p>
-            <p class="text-gray-600 text-sm">फोन : 01572-257067</p>
-            <a href="https://maps.app.goo.gl/SCtzsRRQToHuszvQ9" target="_blank" class="inline-block mt-3 bg-rose-600 text-white px-5 py-2 rounded-full text-sm hover:bg-rose-700 transition"><i class="fas fa-directions mr-1"></i> दिशा निर्देश प्राप्त करें</a>
-        </div>
-        <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 shadow-lg border border-rose-100">
-            <i class="fas fa-horse-head text-2xl text-purple-700"></i>
-            <h3 class="dancing text-2xl font-bold mt-1">बारात सूचना</h3>
-            <p class="text-gray-800"><span class="font-bold">📅 दिनांक:</span> 26 अप्रैल 2026, रविवार</p>
-            <p class="text-gray-800"><span class="font-bold">⏰ प्रस्थान:</span> दोपहर 3:15 बजे</p>
-            <p class="text-gray-800"><span class="font-bold">📍 प्रस्थान स्थल:</span> निवास स्थान से मण्डावा के लिए</p>
-            <div class="mt-2 text-sm text-rose-700"><i class="fas fa-music"></i> बैंड-बाजा, घुड़ी चढ़त बारात</div>
-        </div>
-        </div>
-        
-        <!-- Family / Kutumb details (as per content) -->
-        <div class="bg-white/90 rounded-3xl p-5 md:p-7 shadow-2xl mb-10">
-        <h3 class="dancing text-3xl text-center text-rose-800">🌸 हार्दिक आमंत्रण 🌸</h3>
-        <div class="text-center mt-2 text-gray-700 leading-relaxed">
-            <p>श्रीमती कमला देवी धर्मपत्नी स्वर्गीय वैध श्री गोवर्धन प्रसाद जी अपने सुपौत्र <strong>चिरंजीव कार्तिक (कृष्णा)</strong> सुपुत्र श्री उर्मिला एवं श्री मुरारी लाल शर्मा संग सौभाग्यकांक्षी <strong>श्‍वेता</strong> सुपोत्री स्व श्रीमती जीवणी देवी एवं स्व पंडित श्री प्रहलाद राय जी शर्मा की सुपुत्री श्रीमती रोहिणी देवी एवं श्री सुरेश कुमार जी शर्मा, निवासी मण्डावा, झुंझुनूं के मंगल परिणोत्सव की मधुर बेला पर आपको सादर आमंत्रित करते हैं।</p>
-            <p class="mt-3">अतः आप सपरिवार पधारकर अपनी गरिमामयी उपस्थिति एवं शुभ आशीर्वाद से वर-वधू को शुभाशीष से अभिसिंचित कर हमें अनुग्रहित करें।</p>
-        </div>
-        <div class="grid md:grid-cols-2 gap-4 mt-6 text-sm">
-            <div class="bg-amber-50 p-3 rounded-xl"><span class="font-bold dancing text-rose-700">स्वागतकर्ता:</span> रश्मि - गौरव जी, रचना - प्रवीण जी</div>
-            <div class="bg-amber-50 p-3 rounded-xl"><span class="font-bold dancing text-rose-700">उत्तराकांक्षी:</span> प्रभुदयाल मुरारी लाल शर्मा, श्री गोवर्धन अपार्टमेंट के पास, चांदपोल गेट के बाहर, बिहारी मार्ग, सीकर</div>
-        </div>
-        <div class="grid md:grid-cols-2 gap-4 mt-2 text-sm">
-            <div class="bg-pink-50 p-3 rounded-xl"><span class="font-bold dancing text-rose-700">ननिहाल पक्ष:</span> श्री गिरधारी जी कौशिक, श्री साँवर जी कौशिक, श्री राकेश जी कौशिक, श्री जगदीश जी कौशिक, श्री फूलचंद जी कौशिक, श्री अरुणजी कौशिक</div>
-            <div class="bg-pink-50 p-3 rounded-xl"><span class="font-bold dancing text-rose-700">जवाई पक्ष:</span> सुनीता - बृजमोहन जी, पिंकी - मनोज जी, रेखा - लीलाधर जी, दीपिका - विमलेश जी</div>
-        </div>
-        <div class="flex flex-wrap justify-center gap-3 mt-4 text-center text-gray-700">
-            <span class="bg-white border border-rose-200 rounded-full px-4 py-1"><i class="fas fa-child"></i> बाल मनुहार - हिमिका, अविका, प्रांजल, गौरांश, हिमांगी, निकुंज, ग्रंथ, हर्ष, ज्ञानवी, वेदांश</span>
-            <span class="bg-white border border-rose-200 rounded-full px-4 py-1"><i class="fas fa-phone-alt"></i> संपर्क: 9785883435, 9460863903</span>
-        </div>
-        </div>
-        
-        <!-- dinner & dancing footer note -->
-        <div class="text-center mb-6">
-        <p class="text-gray-500 text-sm mt-6">Join us in our happiness! 🙏 स्वागत है समस्त बबेरवाल परिवार एवं स्नेहीजन</p>
-        </div>  
-    </main>
-    
-    <!-- Music (Optional, hidden auto-play attempt) -->
-    <div class="music hidden">
-        <audio id="weddingAudio" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        </audio>
+    <!-- Family & Relatives section -->
+    <div class="bg-white/70 rounded-2xl p-5 text-center text-sm shadow-inner mb-8">
+      <p><span class="font-bold dancing text-rose-700">स्वागतकर्ता :</span> रश्मि - गौरव जी, रचना - प्रवीण जी</p>
+      <p><span class="font-bold dancing text-rose-700">ननिहाल / जवाई पक्ष :</span> श्री गिरधारी, साँवर, राकेश, जगदीश, फूलचंद, अरुण कौशिक एवं सुनीता, पिंकी, रेखा, दीपिका परिवार</p>
+      <p><i class="fas fa-child text-amber-600"></i> बाल मनुहार: गौरांश, हिमांगी, निकुंज, ग्रंथ, हर्ष, ज्ञानवी, वेदांश</p>
+      <div class="flex justify-center gap-4 mt-3">
+        <a href="https://instagram.com/kartikkrishnasharma" target="_blank" class="text-rose-600 text-xl"><i class="fab fa-instagram"></i> Instagram</a>
+        <span class="text-gray-500">📞 9785883435 | 9460863903</span>
+      </div>
     </div>
     
-    <!-- Sakura petals initialization -->
-    <script>
-        $(window).on('load', function() {
-        $('.sakura-falling').sakura({
-            blow: true,
-            className: 'sakura',
-            fallSpeed: 1.2,
-            maxSize: 28,
-            minSize: 14,
-            delay: 300
-        });
-        });
-        
-        // Countdown Timer for 26 April 2026, 19:00 (Evening 7PM for main wedding vibe, but we target the main ceremony day)
-        // Set target to 26 April 2026, 21:00 (Lagna time approx evening) but as per traditions night; using 21:00 IST
-        function updateCountdown() {
-        const targetDate = new Date(2026, 3, 26, 21, 0, 0); // April 26, 2026 9:00 PM IST
+    <!-- Countdown Timer -->
+    <div class="bg-white rounded-2xl p-4 text-center shadow-lg">
+      <p class="dancing text-2xl text-rose-700">🎉 पाणिग्रहण संस्कार का समय 🎉</p>
+      <div class="flex justify-center gap-4 text-2xl font-mono font-bold mt-2">
+        <div><span id="days" class="bg-rose-100 px-3 py-1 rounded-xl">00</span> दिन</div>
+        <div><span id="hours" class="bg-rose-100 px-3 py-1 rounded-xl">00</span> घंटे</div>
+        <div><span id="minutes" class="bg-rose-100 px-3 py-1 rounded-xl">00</span> मिनट</div>
+        <div><span id="seconds" class="bg-rose-100 px-3 py-1 rounded-xl">00</span> सेकंड</div>
+      </div>
+    </div>
+    
+    <div class="text-center text-gray-500 text-xs mt-6 dancing">वक्रतुण्ड महाकाय सूर्यकोटि समप्रभः। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥</div>
+  </main>
+
+  <!-- Modal for Boy/Girl Detailed Info & Blessings -->
+  <div id="infoModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 invisible opacity-0 modal-fade">
+    <div class="bg-white rounded-3xl max-w-lg w-full mx-4 p-6 relative border-t-8 border-amber-400 shadow-2xl transform transition-all scale-95">
+      <button id="closeInfoModal" class="absolute top-3 right-4 text-gray-500 hover:text-black text-3xl">&times;</button>
+      <div id="modalDynamicContent">
+        <!-- dynamic -->
+      </div>
+      <div class="mt-5 text-center">
+        <button id="modalCloseFooter" class="bg-amber-600 text-white px-6 py-2 rounded-full">आशीर्वाद सहित बंद करें</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shagun Payment Popup -->
+  <div id="shagunPopup" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-all">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 relative shadow-2xl">
+      <h3 class="dancing text-2xl text-center text-rose-700">💵 शगुन राशि / Contribution 💵</h3>
+      <p id="shagunSideLabel" class="text-center font-bold text-gray-700 mt-1"></p>
+      <div class="grid grid-cols-2 gap-3 my-5">
+        <button class="shagun-amt bg-rose-50 p-2 rounded-xl font-bold text-rose-800 hover:bg-rose-100" data-amount="51">₹ 51</button>
+        <button class="shagun-amt bg-rose-50 p-2 rounded-xl font-bold text-rose-800" data-amount="101">₹ 101</button>
+        <button class="shagun-amt bg-rose-50 p-2 rounded-xl font-bold text-rose-800" data-amount="251">₹ 251</button>
+        <button class="shagun-amt bg-rose-50 p-2 rounded-xl font-bold text-rose-800" data-amount="501">₹ 501</button>
+        <button class="shagun-amt bg-rose-50 p-2 rounded-xl font-bold text-rose-800" data-amount="1100">₹ 1100</button>
+        <button class="shagun-amt bg-rose-50 p-2 rounded-xl font-bold text-rose-800" data-amount="2100">₹ 2100</button>
+      </div>
+      <div class="flex gap-2 mt-2">
+        <input type="number" id="customShagun" placeholder="अपनी राशि (₹)" class="border rounded-xl p-2 w-full">
+        <button id="customPayBtn" class="bg-amber-600 text-white px-4 rounded-xl">भेजें</button>
+      </div>
+      <p class="text-xs text-gray-500 text-center mt-3">QR स्कैन करें या राशि चुनकर UPI से भेजें।</p>
+      <button id="closeShagunPopup" class="absolute top-2 right-3 text-gray-400 text-xl">&times;</button>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      // Sakura petals effect
+      $('.sakura-falling').sakura({
+        blow: true,
+        fallSpeed: 1,
+        maxSize: 28,
+        minSize: 12,
+        delay: 300
+      });
+      
+      // QR Codes (UPI demo IDs, replace with actual in production)
+      const boyUpi = "boykartikfamily@okhdfcbank";
+      const girlUpi = "shwetawedding@ybl";
+      new QRCode(document.getElementById("qr-boy"), { text: `upi://pay?pa=${boyUpi}&pn=Kartik%20Family&am=0&cu=INR`, width: 130, height: 130, colorDark: "#4338ca" });
+      new QRCode(document.getElementById("qr-girl"), { text: `upi://pay?pa=${girlUpi}&pn=Shweta%20Family&am=0&cu=INR`, width: 130, height: 130, colorDark: "#e11d48" });
+      
+      let activeShagunSide = '';
+      let activeUpi = '';
+      let activeName = '';
+      
+      function openShagun(side) {
+        activeShagunSide = side;
+        if(side === 'boy') {
+          activeUpi = boyUpi;
+          activeName = "Kartik Family (वर पक्ष)";
+          $('#shagunSideLabel').html("💙 वर पक्ष को शगुन 💙");
+        } else {
+          activeUpi = girlUpi;
+          activeName = "Shweta Family (वधू पक्ष)";
+          $('#shagunSideLabel').html("🌸 वधू पक्ष को शगुन 🌸");
+        }
+        $('#shagunPopup').fadeIn(200).removeClass('hidden');
+      }
+      
+      $('.shagun-boy').click(() => openShagun('boy'));
+      $('.shagun-girl').click(() => openShagun('girl'));
+      
+      function payAmount(amount) {
+        if(!activeUpi) return;
+        const upiString = `upi://pay?pa=${activeUpi}&pn=${encodeURIComponent(activeName)}&am=${amount}&cu=INR&tn=Wedding%20Shagun`;
+        window.location.href = upiString;
+        setTimeout(() => alert(`₹${amount} का शगुन भेजने के लिए UPI ऐप खोलें। धन्यवाद!`), 300);
+      }
+      
+      $('.shagun-amt').click(function() { payAmount($(this).data('amount')); });
+      $('#customPayBtn').click(function() {
+        let amt = $('#customShagun').val();
+        if(amt && parseInt(amt) > 0) payAmount(parseInt(amt));
+        else alert("कृपया सही राशि भरें");
+      });
+      $('#closeShagunPopup, #closeShagunPopup2').click(function() { $('#shagunPopup').fadeOut(); });
+      
+      // Modal Details for Boy & Girl
+      function showSideDetails(side) {
+        let html = '';
+        if(side === 'boy') {
+          html = `<div class="text-center"><i class="fas fa-male text-6xl text-indigo-600"></i><h2 class="dancing text-3xl font-bold">वर पक्ष - विस्तृत जानकारी</h2><div class="border-b my-3"></div>
+          <p><strong>पिता:</strong> श्री मुरारी लाल शर्मा | <strong>माता:</strong> श्रीमती उर्मिला देवी</p>
+          <p><strong>वर:</strong> चिरंजीव कार्तिक (कृष्णा)</p>
+          <p><strong>ननिहाल पक्ष:</strong> श्री गिरधारी, साँवर, राकेश, जगदीश, फूलचंद, अरुण कौशिक</p>
+          <p><strong>प्रभुदायल मुरारी लाल शर्मा,</strong> चांदपोल गेट, बिहारी मार्ग, सीकर</p>
+          <p class="mt-2 bg-indigo-100 p-2 rounded-full"><i class="fas fa-clock"></i> सभी कार्यक्रम ऊपर सूचीबद्ध हैं। आपका आशीर्वाद सादर निमंत्रण।</p>`;
+        } else {
+          html = `<div class="text-center"><i class="fas fa-female text-6xl text-rose-600"></i><h2 class="dancing text-3xl font-bold">वधू पक्ष - विस्तृत जानकारी</h2><div class="border-b my-3"></div>
+          <p><strong>पिता:</strong> श्री सुरेश कुमार शर्मा | <strong>माता:</strong> श्रीमती रोहिणी देवी</p>
+          <p><strong>वधू:</strong> श्‍वेता</p>
+          <p><strong>भुआजी-फूफाजी:</strong> स्व. द्रोपदी-नंदकिशोर, मुन्नी देवी-महावीर, शकुंतला-विष्णु, संतोष-मालचंद</p>
+          <p><strong>निवास :</strong> मण्डावा, झुंझुनूं (राजस्थान)</p>
+          <p class="mt-2 bg-rose-100 p-2 rounded-full"><i class="fas fa-heart"></i> हार्दिक आमंत्रण, कृपया पधारें।</p>`;
+        }
+        $('#modalDynamicContent').html(html);
+        $('#infoModal').css({'visibility':'visible','opacity':1});
+      }
+      $('.boy-details-btn').click(() => showSideDetails('boy'));
+      $('.girl-details-btn').click(() => showSideDetails('girl'));
+      $('#closeInfoModal, #modalCloseFooter').click(() => $('#infoModal').css({'visibility':'hidden','opacity':0}));
+      $(window).click(function(e) { if(e.target.id === 'infoModal') $('#infoModal').css({'visibility':'hidden','opacity':0}); });
+      
+      // Countdown
+      function updateCountdown() {
+        const target = new Date(2026, 3, 26, 21, 0, 0);
         const now = new Date();
-        const diff = targetDate - now;
-        
-        if(diff <= 0) {
-            document.getElementById('days').innerText = '00';
-            document.getElementById('hours').innerText = '00';
-            document.getElementById('minutes').innerText = '00';
-            document.getElementById('seconds').innerText = '00';
-            return;
-        }
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (86400000)) / (3600000));
-        const minutes = Math.floor((diff % 3600000) / 60000);
-        const seconds = Math.floor((diff % 60000) / 1000);
-        
-        document.getElementById('days').innerText = days < 10 ? '0'+days : days;
-        document.getElementById('hours').innerText = hours < 10 ? '0'+hours : hours;
-        document.getElementById('minutes').innerText = minutes < 10 ? '0'+minutes : minutes;
-        document.getElementById('seconds').innerText = seconds < 10 ? '0'+seconds : seconds;
-        }
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-        
-        // Optional gentle music play on user gesture - keep subtle (user can click instagram or any)
-        // Not auto-playing due to browser policies, but we add listener
-        const audioElem = document.getElementById('weddingAudio');
-        if(audioElem) {
-        document.body.addEventListener('click', function initAudio() {
-            if(audioElem.paused) {
-            audioElem.play().catch(e => console.log("audio play blocked"));
-            }
-        }, { once: true });
-        }
-    </script>
-    </body>
-    </html>
+        const diff = target - now;
+        if(diff <= 0) { $('#days,#hours,#minutes,#seconds').text('00'); return; }
+        const days = Math.floor(diff/(1000*3600*24));
+        const hrs = Math.floor((diff%86400000)/3600000);
+        const mins = Math.floor((diff%3600000)/60000);
+        const secs = Math.floor((diff%60000)/1000);
+        $('#days').text(days<10?'0'+days:days);
+        $('#hours').text(hrs<10?'0'+hrs:hrs);
+        $('#minutes').text(mins<10?'0'+mins:mins);
+        $('#seconds').text(secs<10?'0'+secs:secs);
+      }
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    });
+  </script>
+</body>
+</html>
